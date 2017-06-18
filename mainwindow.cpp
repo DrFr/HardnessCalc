@@ -3,10 +3,6 @@
 
 #include <cmath>
 
-QPair<QString, double> makePair(QString s, double d) {
-    return QPair<QString, double>(s, d);
-}
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -42,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
              << "F" ///3
              << "ppm"; ///4
 
+    ////////////////////////// KH
     pointKH[0] = 21.8;
     pointKH[1] = 10.72;
     pointKH[2] = 30;
@@ -52,6 +49,28 @@ MainWindow::MainWindow(QWidget *parent) :
     pointKH[7] = 15.05;
     pointKH[8] = 18.91;
     pointKH[9] = 13.96;
+
+    pointKHCation[0] = -1;
+    pointKHCation[1] = -1;
+    pointKHCation[2] = 3.65;
+    pointKHCation[3] = 7.71;
+    pointKHCation[4] = 4.05;
+    pointKHCation[5] = 6.02;
+    pointKHCation[6] = 2.50;
+    pointKHCation[7] = 3.47;
+    pointKHCation[8] = 4.61 / 2;
+    pointKHCation[9] = 8.60 / 2;
+
+    pointKHAnion[0] = -1;
+    pointKHAnion[1] = -1;
+    pointKHAnion[2] = 1.38;
+    pointKHAnion[3] = 1.15;
+    pointKHAnion[4] = 2.66 / 2;
+    pointKHAnion[5] = 2.40 / 2;
+    pointKHAnion[6] = 1.67;
+    pointKHAnion[7] = 1.41;
+    pointKHAnion[8] = 1.77;
+    pointKHAnion[9] = 1.30;
 
     KHSaltList << "HCO3-" ///0
                << "CO3--" ///1
@@ -64,26 +83,73 @@ MainWindow::MainWindow(QWidget *parent) :
                << "Na2CO3" ///8
                << "K2CO3"; ///9
 
+    KHCationList << "false" ///0
+                 << "false" ///1
+                 << "Na+" ///2
+                 << "K+" ///3
+                 << "Ca++" ///4
+                 << "Mg++" ///5
+                 << "Ca++" ///6
+                 << "Mg++" ///7
+                 << "Na+" ///8
+                 << "K+"; ///9
+
+    KHAnionList << "false" ///0
+                << "false" ///1
+                << "HCO3-" ///2
+                << "HCO3-" ///3
+                << "HCO3-" ///4
+                << "HCO3-" ///5
+                << "CO3--" ///6
+                << "CO3--" ///7
+                << "CO3--" ///8
+                << "CO3--"; ///9
+
+    ////////////////////////////
     pointCa[0] = 2.50;
     pointCa[1] = 4.05;
     pointCa[2] = 4.30;
     pointCa[3] = 2.77;
+
+    pointCaAnion[0] = 1.67;
+    pointCaAnion[1] = 2.66 / 2;
+    pointCaAnion[2] = 1.79;
+    pointCaAnion[3] = 3.13 / 2;
 
     CaSaltList << "CaCO3" ///0
                << "Ca(HCO3)2" ///1
                << "CaSO4*2H2O" ///2
                << "CaCl2"; ///3
 
+    CaAnionList << "CO3--" ///0
+                << "HCO3-" ///1
+                << "SO4--" ///2
+                << "Cl-"; ///3
+
+
+
     pointMg[0] = 3.47;
     pointMg[1] = 6.02;
     pointMg[2] = 10.14;
     pointMg[3] = 3.98;
+
+    pointMgAnion[0] = 1.41;
+    pointMgAnion[1] = 2.40 / 2;
+    pointMgAnion[2] = 2.57;
+    pointMgAnion[3] = 2.69 / 2;
 
     MgSaltList << "MgCO3" ///0
                << "Mg(HCO3)2" ///1
                << "MgSO4*7H2O" ///2
                << "MgCl2"; ///3
 
+    MgAnionList << "CO3--" ///0
+                << "HCO3-" ///1
+                << "SO4--" ///2
+                << "Cl-"; ///3
+
+
+    ///////////////////////////////////////
 
 
     ui->comboBoxCaSalts->addItems(CaSaltList);
@@ -194,16 +260,25 @@ void MainWindow::on_doubleSpinBoxMg_editingFinished()
     calcSaltByMg();
 }
 
+/*
+ * Slot: GH Ca ratio spin
+ * */
 void MainWindow::on_doubleSpinBoxCaRation_editingFinished()
 {
     on_doubleSpinBoxResult_editingFinished();
 }
 
+/*
+ * Slot: GH Mg ratio spin
+ * */
 void MainWindow::on_doubleSpinBoxMgRation_editingFinished()
 {
     on_doubleSpinBoxResult_editingFinished();
 }
 
+/*
+ * Slot: GH result
+ * */
 void MainWindow::on_doubleSpinBoxResult_editingFinished()
 {
     double hardless = ui->doubleSpinBoxResult->value()
@@ -225,6 +300,9 @@ void MainWindow::on_doubleSpinBoxResult_editingFinished()
     calcSaltByMg();
 }
 
+/*
+ * Slot: GH result select
+ * */
 void MainWindow::on_comboBoxMineralResult_currentIndexChanged(int index)
 {
     comboBoxMineralResult_val = index;
@@ -232,25 +310,60 @@ void MainWindow::on_comboBoxMineralResult_currentIndexChanged(int index)
     ui->doubleSpinBoxResult->setValue(calcMineral());
 }
 
+/*
+ * Slot: KH spinbox
+ * */
 void MainWindow::on_doubleSpinBox_2_editingFinished()
 {
     double dkh = ui->doubleSpinBox_2->value();
     ui->doubleSpinBox_3->setValue(dkh * pointKH[KHIndex]);
 
+    ui->doubleSpinBox_KHCation->setValue(dkh * pointKH[KHIndex] / pointKHCation[KHIndex]);
+    ui->doubleSpinBox_KHAnion->setValue(dkh * pointKH[KHIndex] / pointKHAnion[KHIndex]);
+
     lastKHEdit = 0;
 }
 
+/*
+ * Slot: KH salt spinbox
+ * */
 void MainWindow::on_doubleSpinBox_3_editingFinished()
 {
     double hco3 = ui->doubleSpinBox_3->value();
     ui->doubleSpinBox_2->setValue(hco3 / pointKH[KHIndex]);
 
+    ui->doubleSpinBox_KHCation->setValue(hco3 / pointKHCation[KHIndex]);
+    ui->doubleSpinBox_KHAnion->setValue(hco3 / pointKHAnion[KHIndex]);
+
     lastKHEdit = 1;
 }
 
+/*
+ * Slot: KH salt select
+ * */
 void MainWindow::on_comboBoxKHSalt_currentIndexChanged(int index)
 {
     KHIndex = index;
+
+    ui->labelKHAnion->setEnabled(true);
+    ui->labelKHCation->setEnabled(true);
+
+    ui->doubleSpinBox_KHCation->setEnabled(true);
+    ui->doubleSpinBox_KHAnion->setEnabled(true);
+
+    ui->labelKHCation->setText(KHCationList[KHIndex]);
+    ui->labelKHAnion->setText(KHAnionList[KHIndex]);
+
+    if(KHIndex == 0 || KHIndex == 1) {
+        ui->labelKHAnion->setEnabled(false);
+        ui->labelKHCation->setEnabled(false);
+
+        ui->doubleSpinBox_KHCation->setEnabled(false);
+        ui->doubleSpinBox_KHAnion->setEnabled(false);
+
+        ui->labelKHCation->setText("Cation");
+        ui->labelKHAnion->setText("Anion");
+    }
 
     if(lastKHEdit == 0) {
         on_doubleSpinBox_2_editingFinished();
@@ -259,54 +372,132 @@ void MainWindow::on_comboBoxKHSalt_currentIndexChanged(int index)
     }
 }
 
+/*
+ * Slot: GH Ca salts select
+ * */
 void MainWindow::on_comboBoxCaSalts_currentIndexChanged(int index)
 {
     CaIndex = index;
 
+    ui->label_CaAnion->setText(CaAnionList[CaIndex]);
+
     calcSaltByCa();
 }
 
+/*
+ * Slot: GH Mg salts select
+ * */
 void MainWindow::on_comboBoxMgSalts_currentIndexChanged(int index)
 {
     MgIndex = index;
 
+    ui->label_MgAnion->setText(MgAnionList[MgIndex]);
+
     calcSaltByMg();
 }
 
+/*
+ * Slot: GH Ca salt spinbox
+ * */
 void MainWindow::on_doubleSpinBox_CaSalt_editingFinished()
 {
     calcCaBySalt();
 }
 
+/*
+ * Slot: GH Mg salt spinbox
+ * */
 void MainWindow::on_doubleSpinBox_MgSalt_editingFinished()
 {
     calcMgBySalt();
 }
 
+/*
+ * GH
+ * */
 void MainWindow::calcSaltByCa() {
     double Ca = ui->doubleSpinBoxCa->value();
 
     ui->doubleSpinBox_CaSalt->setValue(Ca * pointCa[CaIndex]);
+
+    ui->doubleSpinBox_CaAnion->setValue(Ca * pointCa[CaIndex] / pointCaAnion[CaIndex]);
 }
 
+/*
+ * GH
+ * */
 void MainWindow::calcSaltByMg() {
     double Mg = ui->doubleSpinBoxMg->value();
 
     ui->doubleSpinBox_MgSalt->setValue(Mg * pointMg[MgIndex]);
+
+    ui->doubleSpinBox_MgAnion->setValue(Mg * pointMg[MgIndex] / pointMgAnion[MgIndex]);
 }
 
+/*
+ * GH
+ * */
 void MainWindow::calcCaBySalt() {
     double salt = ui->doubleSpinBox_CaSalt->value();
 
     ui->doubleSpinBoxCa->setValue(salt / pointCa[CaIndex]);
 
     ui->doubleSpinBoxResult->setValue(calcMineral());
+
+    ui->doubleSpinBox_CaAnion->setValue(salt / pointCaAnion[CaIndex]);
 }
 
+/*
+ * GH
+ * */
 void MainWindow::calcMgBySalt() {
     double salt = ui->doubleSpinBox_MgSalt->value();
 
     ui->doubleSpinBoxMg->setValue(salt / pointMg[MgIndex]);
 
     ui->doubleSpinBoxResult->setValue(calcMineral());
+
+    ui->doubleSpinBox_MgAnion->setValue(salt / pointMgAnion[MgIndex]);
+}
+
+/*
+ * Slot: KH Cation spinbox
+ * */
+void MainWindow::on_doubleSpinBox_KHCation_editingFinished()
+{
+    double cation = ui->doubleSpinBox_KHCation->value();
+
+    ui->doubleSpinBox_3->setValue(cation * pointKHCation[KHIndex]);
+
+    on_doubleSpinBox_3_editingFinished();
+}
+
+/*
+ * Slot: KH Anion spinbox
+ * */
+void MainWindow::on_doubleSpinBox_KHAnion_editingFinished()
+{
+    double anion = ui->doubleSpinBox_KHAnion->value();
+
+    ui->doubleSpinBox_3->setValue(anion * pointKHAnion[KHIndex]);
+
+    on_doubleSpinBox_3_editingFinished();
+}
+
+void MainWindow::on_doubleSpinBox_CaAnion_editingFinished()
+{
+    double anion = ui->doubleSpinBox_CaAnion->value();
+
+    ui->doubleSpinBox_CaSalt->setValue(anion * pointCaAnion[CaIndex]);
+
+    calcCaBySalt();
+}
+
+void MainWindow::on_doubleSpinBox_MgAnion_editingFinished()
+{
+    double anion = ui->doubleSpinBox_MgAnion->value();
+
+    ui->doubleSpinBox_MgSalt->setValue(anion * pointMgAnion[MgIndex]);
+
+    calcMgBySalt();
 }

@@ -55,13 +55,25 @@ private slots:
 
     void on_doubleSpinBox_MgSalt_editingFinished();
 
+    void on_doubleSpinBox_KHCation_editingFinished();
+
+    void on_doubleSpinBox_KHAnion_editingFinished();
+
+    void on_doubleSpinBox_CaAnion_editingFinished();
+
+    void on_doubleSpinBox_MgAnion_editingFinished();
+
 private:
     Ui::MainWindow *ui;
 
     double currentIN, currentOUT,
            currentINpoint, currentOUTpoint;
 
-    QMap<int, double> point, pointKH, pointCa, pointMg;
+    QMap<int, double> point, pointKH, pointCa,
+    pointMg, pointKHCation, pointKHAnion,
+    pointCaAnion, pointMgAnion;
+
+    QStringList KHCationList, KHAnionList, CaAnionList, MgAnionList;
 
     double currentCa, currentMg,
            currentCaRatio, currentMgRatio;
