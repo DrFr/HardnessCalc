@@ -3,6 +3,11 @@
 
 #include <cmath>
 
+double round100(double val) {
+    return round(val * 100) / 100;
+}
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -40,37 +45,37 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ////////////////////////// KH
     pointKH[0] = 21.8;
-    pointKH[1] = 10.72;
-    pointKH[2] = 30;
-    pointKH[3] = 25.05;
-    pointKH[4] = 28.96;
-    pointKH[5] = 26.14;
-    pointKH[6] = 17.86;
-    pointKH[7] = 15.05;
-    pointKH[8] = 18.91;
-    pointKH[9] = 13.96;
+    pointKH[1] = 10.7145;
+    pointKH[2] = 30.019672131;//30; ///nahco3
+    pointKH[3] = 25.050749289;//25.05; ///khco3
+    pointKH[4] = 28.959773254;//28.96; ///ca(hco3)2
+    pointKH[5] = 26.141811696;//26.14; ///mg(hco3)2
+    pointKH[6] = 17,870630941;//17.86; ///caco3
+    pointKH[7] = 15.045147498;//15.05; ///mgco3
+    pointKH[8] = 18.913122874;//18.91; ///na2co3
+    pointKH[9] = 13.955288859;//13.96; ////k2co3
 
     pointKHCation[0] = -1;
     pointKHCation[1] = -1;
-    pointKHCation[2] = 3.65;
-    pointKHCation[3] = 7.71;
-    pointKHCation[4] = 4.05;
-    pointKHCation[5] = 6.02;
-    pointKHCation[6] = 2.50;
-    pointKHCation[7] = 3.47;
-    pointKHCation[8] = 4.61 / 2;
-    pointKHCation[9] = 8.60 / 2;
+    pointKHCation[2] = 3.653986182;//3.65;
+    pointKHCation[3] = 7.706146203;//7.71;
+    pointKHCation[4] = 4.044789161;//4.05;
+    pointKHCation[5] = 6.020945523;//6.02;
+    pointKHCation[6] = 2.497247617;//2.50;
+    pointKHCation[7] = 3.469004691;//3.47;
+    pointKHCation[8] = 4.610259403 / 2;//4.61 / 2;
+    pointKHCation[9] = 8.595373861 / 2;//8.60 / 2;
 
     pointKHAnion[0] = -1;
     pointKHAnion[1] = -1;
-    pointKHAnion[2] = 1.38;
-    pointKHAnion[3] = 1.15;
-    pointKHAnion[4] = 2.66 / 2;
-    pointKHAnion[5] = 2.40 / 2;
-    pointKHAnion[6] = 1.67;
-    pointKHAnion[7] = 1.41;
-    pointKHAnion[8] = 1.77;
-    pointKHAnion[9] = 1.30;
+    pointKHAnion[2] = 1.376791713;//1.38;
+    pointKHAnion[3] = 1.14911694;//1.15;
+    pointKHAnion[4] = 2.656859932 / 2;//2.66 / 2;
+    pointKHAnion[5] = 2.398331348 / 2;//2.40 / 2;
+    pointKHAnion[6] = 1.667892197;//1.67;
+    pointKHAnion[7] = 1.405021507;//1.41;
+    pointKHAnion[8] = 1.766283059;//1.77;
+    pointKHAnion[9] = 1.303242855;//1.30;
 
     KHSaltList << "HCO3-" ///0
                << "CO3--" ///1
@@ -106,47 +111,67 @@ MainWindow::MainWindow(QWidget *parent) :
                 << "CO3--"; ///9
 
     ////////////////////////////
-    pointCa[0] = 2.50;
-    pointCa[1] = 4.05;
-    pointCa[2] = 4.30;
-    pointCa[3] = 2.77;
+    pointCa[0] = 2.497247617;//2.50;
+    pointCa[1] = 4.044789161;//4.05;
+    pointCa[2] = 4.295686911;//4.30;
+    pointCa[3] = 2.768850741;//2.77;
+    pointCa[4] = 3.396704426;//3.40;
+    pointCa[5] = 4.094142422;//4.09;
+    pointCa[6] = 5.892107391;//5.89;
 
-    pointCaAnion[0] = 1.67;
-    pointCaAnion[1] = 2.66 / 2;
-    pointCaAnion[2] = 1.79;
-    pointCaAnion[3] = 3.13 / 2;
+    pointCaAnion[0] = 1.667892197;//1.67;
+    pointCaAnion[1] = 2.656859932 / 2;//2.66 / 2;
+    pointCaAnion[2] = 1.792330695;//1.79;
+    pointCaAnion[3] = 3.130677651 / 2;//3.13 / 2;
+    pointCaAnion[4] = 1.417239602;//1.42;
+    pointCaAnion[5] = 2.646382657 / 2;//2.65 / 2;
+    pointCaAnion[6] = 3.80855603 / 2;//3.81 / 2;
 
     CaSaltList << "CaCO3" ///0
                << "Ca(HCO3)2" ///1
                << "CaSO4*2H2O" ///2
-               << "CaCl2"; ///3
+               << "CaCl2" ///3
+               << "CaSO4" ///4
+               << "Ca(NO3)2" ///5
+               << "Ca(NO3)2*4H2O"; ///6
 
     CaAnionList << "CO3--" ///0
                 << "HCO3-" ///1
                 << "SO4--" ///2
-                << "Cl-"; ///3
+                << "Cl-" ///3
+                << "SO4--" ///4
+                << "NO3-" ///5
+                << "NO3-"; ///6
 
 
 
-    pointMg[0] = 3.47;
-    pointMg[1] = 6.02;
-    pointMg[2] = 10.14;
-    pointMg[3] = 3.98;
+    pointMg[0] = 3.469004691;//3.47;
+    pointMg[1] = 6.020945523;//6.02;
+    pointMg[2] = 10.140803571;//10.14;
+    pointMg[3] = 3.916886109;//3.98;
+    pointMg[4] = 6.102330481;//6.10;
+    pointMg[5] = 10.549674951;//10.55;
 
-    pointMgAnion[0] = 1.41;
-    pointMgAnion[1] = 2.40 / 2;
-    pointMgAnion[2] = 2.57;
-    pointMgAnion[3] = 2.69 / 2;
+    pointMgAnion[0] = 1.405021507;//1.41;
+    pointMgAnion[1] = 2.398331348 / 2;//2.40 / 2;
+    pointMgAnion[2] = 2.565840218;//2.57;
+    pointMgAnion[3] = 2.685662698 / 2;//2.69 / 2;
+    pointMgAnion[4] = 2.391977746 / 2;//2.39 / 2;
+    pointMgAnion[5] = 4.135237806 / 2;//4.14 / 2;
 
     MgSaltList << "MgCO3" ///0
                << "Mg(HCO3)2" ///1
                << "MgSO4*7H2O" ///2
-               << "MgCl2"; ///3
+               << "MgCl2" ///3
+               << "Mg(NO3)2" ///4
+               << "Mg(NO3)2*6H2O"; ///5
 
     MgAnionList << "CO3--" ///0
                 << "HCO3-" ///1
                 << "SO4--" ///2
-                << "Cl-"; ///3
+                << "Cl-" ///3
+                << "NO3-" ///4
+                << "NO3-"; ///5
 
 
     ///////////////////////////////////////
@@ -208,8 +233,8 @@ double MainWindow::calcMineral() {
     currentCaRatio = ui->doubleSpinBoxCaRation->value();
     currentMgRatio = ui->doubleSpinBoxMgRation->value();
 
-    double hardlessCa = currentCa / 20.04;
-    double hardlessMg = currentMg / 12.15;
+    double hardnessCa = currentCa / 20.04;
+    double hardnessMg = currentMg / 12.15;
     double ratio = currentCa / currentMg;
     if(currentCa >= currentMg) {
         if(currentMg != 0) {
@@ -230,22 +255,31 @@ double MainWindow::calcMineral() {
         }
     }
 
-    return (hardlessCa + hardlessMg)
+    return (hardnessCa + hardnessMg)
             * point[comboBoxMineralResult_val];
 }
 
+/*
+ * Slot: Converter out
+ * */
 void MainWindow::on_doubleSpinBoxOUT_editingFinished()
 {
     ui->doubleSpinBoxIN->setValue(count(currentOUT,
                                         currentINpoint, currentOUTpoint));
 }
 
+/*
+ * Slot: Converter in
+ * */
 void MainWindow::on_doubleSpinBoxIN_editingFinished()
 {
     ui->doubleSpinBoxOUT->setValue(count(currentIN,
                                          currentOUTpoint, currentINpoint));
 }
 
+/*
+ * Slot: GH Ca ion
+ * */
 void MainWindow::on_doubleSpinBoxCa_editingFinished()
 {
     ui->doubleSpinBoxResult->setValue(calcMineral());
@@ -253,6 +287,9 @@ void MainWindow::on_doubleSpinBoxCa_editingFinished()
     calcSaltByCa();
 }
 
+/*
+ * Slot: GH Mg ion
+ * */
 void MainWindow::on_doubleSpinBoxMg_editingFinished()
 {
     ui->doubleSpinBoxResult->setValue(calcMineral());
@@ -290,8 +327,8 @@ void MainWindow::on_doubleSpinBoxResult_editingFinished()
     double y = round((ratioMg / 12.15) * 1000) / 1000;
     double z = round((hardless / (x + y)) * 1000) / 1000;
 
-    double Ca = round((z * ratioCa) * 100) / 100;
-    double Mg = round((z * ratioMg) * 100) / 100;
+    double Ca = round100(z * ratioCa);
+    double Mg = round100(z * ratioMg);
 
     ui->doubleSpinBoxCa->setValue(Ca);
     ui->doubleSpinBoxMg->setValue(Mg);
@@ -316,10 +353,15 @@ void MainWindow::on_comboBoxMineralResult_currentIndexChanged(int index)
 void MainWindow::on_doubleSpinBox_2_editingFinished()
 {
     double dkh = ui->doubleSpinBox_2->value();
-    ui->doubleSpinBox_3->setValue(dkh * pointKH[KHIndex]);
 
-    ui->doubleSpinBox_KHCation->setValue(dkh * pointKH[KHIndex] / pointKHCation[KHIndex]);
-    ui->doubleSpinBox_KHAnion->setValue(dkh * pointKH[KHIndex] / pointKHAnion[KHIndex]);
+    double substance = round100(dkh * pointKH[KHIndex]);
+    double cation = round100(substance / pointKHCation[KHIndex]);
+    double anion = round100(substance / pointKHAnion[KHIndex]);
+
+    ui->doubleSpinBox_3->setValue(substance);
+
+    ui->doubleSpinBox_KHCation->setValue(cation);
+    ui->doubleSpinBox_KHAnion->setValue(anion);
 
     lastKHEdit = 0;
 }
@@ -330,10 +372,15 @@ void MainWindow::on_doubleSpinBox_2_editingFinished()
 void MainWindow::on_doubleSpinBox_3_editingFinished()
 {
     double hco3 = ui->doubleSpinBox_3->value();
-    ui->doubleSpinBox_2->setValue(hco3 / pointKH[KHIndex]);
 
-    ui->doubleSpinBox_KHCation->setValue(hco3 / pointKHCation[KHIndex]);
-    ui->doubleSpinBox_KHAnion->setValue(hco3 / pointKHAnion[KHIndex]);
+    double kh = round100(hco3 / pointKH[KHIndex]);
+    double cation = round100(hco3 / pointKHCation[KHIndex]);
+    double anion = round100(hco3 / pointKHAnion[KHIndex]);
+
+    ui->doubleSpinBox_2->setValue(kh);
+
+    ui->doubleSpinBox_KHCation->setValue(cation);
+    ui->doubleSpinBox_KHAnion->setValue(anion);
 
     lastKHEdit = 1;
 }
@@ -418,9 +465,11 @@ void MainWindow::on_doubleSpinBox_MgSalt_editingFinished()
 void MainWindow::calcSaltByCa() {
     double Ca = ui->doubleSpinBoxCa->value();
 
-    ui->doubleSpinBox_CaSalt->setValue(Ca * pointCa[CaIndex]);
+    double salt = round100(Ca * pointCa[CaIndex]);
 
-    ui->doubleSpinBox_CaAnion->setValue(Ca * pointCa[CaIndex] / pointCaAnion[CaIndex]);
+    ui->doubleSpinBox_CaSalt->setValue(salt);
+
+    ui->doubleSpinBox_CaAnion->setValue(round100(salt / pointCaAnion[CaIndex]));
 }
 
 /*
@@ -429,9 +478,11 @@ void MainWindow::calcSaltByCa() {
 void MainWindow::calcSaltByMg() {
     double Mg = ui->doubleSpinBoxMg->value();
 
-    ui->doubleSpinBox_MgSalt->setValue(Mg * pointMg[MgIndex]);
+    double salt = round100(Mg * pointMg[MgIndex]);
 
-    ui->doubleSpinBox_MgAnion->setValue(Mg * pointMg[MgIndex] / pointMgAnion[MgIndex]);
+    ui->doubleSpinBox_MgSalt->setValue(salt);
+
+    ui->doubleSpinBox_MgAnion->setValue(round100(salt / pointMgAnion[MgIndex]));
 }
 
 /*
@@ -440,11 +491,11 @@ void MainWindow::calcSaltByMg() {
 void MainWindow::calcCaBySalt() {
     double salt = ui->doubleSpinBox_CaSalt->value();
 
-    ui->doubleSpinBoxCa->setValue(salt / pointCa[CaIndex]);
+    ui->doubleSpinBoxCa->setValue(round100(salt / pointCa[CaIndex]));
 
     ui->doubleSpinBoxResult->setValue(calcMineral());
 
-    ui->doubleSpinBox_CaAnion->setValue(salt / pointCaAnion[CaIndex]);
+    ui->doubleSpinBox_CaAnion->setValue(round100(salt / pointCaAnion[CaIndex]));
 }
 
 /*
@@ -453,11 +504,11 @@ void MainWindow::calcCaBySalt() {
 void MainWindow::calcMgBySalt() {
     double salt = ui->doubleSpinBox_MgSalt->value();
 
-    ui->doubleSpinBoxMg->setValue(salt / pointMg[MgIndex]);
+    ui->doubleSpinBoxMg->setValue(round100(salt / pointMg[MgIndex]));
 
     ui->doubleSpinBoxResult->setValue(calcMineral());
 
-    ui->doubleSpinBox_MgAnion->setValue(salt / pointMgAnion[MgIndex]);
+    ui->doubleSpinBox_MgAnion->setValue(round100(salt / pointMgAnion[MgIndex]));
 }
 
 /*
@@ -467,7 +518,9 @@ void MainWindow::on_doubleSpinBox_KHCation_editingFinished()
 {
     double cation = ui->doubleSpinBox_KHCation->value();
 
-    ui->doubleSpinBox_3->setValue(cation * pointKHCation[KHIndex]);
+    double substance = round100(cation * pointKHCation[KHIndex]);
+
+    ui->doubleSpinBox_3->setValue(substance);
 
     on_doubleSpinBox_3_editingFinished();
 }
@@ -479,25 +532,33 @@ void MainWindow::on_doubleSpinBox_KHAnion_editingFinished()
 {
     double anion = ui->doubleSpinBox_KHAnion->value();
 
-    ui->doubleSpinBox_3->setValue(anion * pointKHAnion[KHIndex]);
+    double substance = round100(anion * pointKHAnion[KHIndex]);
+
+    ui->doubleSpinBox_3->setValue(substance);
 
     on_doubleSpinBox_3_editingFinished();
 }
 
+/*
+ * Slot: GH Ca anion
+ * */
 void MainWindow::on_doubleSpinBox_CaAnion_editingFinished()
 {
     double anion = ui->doubleSpinBox_CaAnion->value();
 
-    ui->doubleSpinBox_CaSalt->setValue(anion * pointCaAnion[CaIndex]);
+    ui->doubleSpinBox_CaSalt->setValue(round100(anion * pointCaAnion[CaIndex]));
 
     calcCaBySalt();
 }
 
+/*
+ * Slot: GH Mg anion
+ * */
 void MainWindow::on_doubleSpinBox_MgAnion_editingFinished()
 {
     double anion = ui->doubleSpinBox_MgAnion->value();
 
-    ui->doubleSpinBox_MgSalt->setValue(anion * pointMgAnion[MgIndex]);
+    ui->doubleSpinBox_MgSalt->setValue(round100(anion * pointMgAnion[MgIndex]));
 
     calcMgBySalt();
 }
