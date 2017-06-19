@@ -50,7 +50,7 @@ MainWindow::MainWindow(QWidget *parent) :
     pointKH[3] = 25.050749289;//25.05; ///khco3
     pointKH[4] = 28.959773254;//28.96; ///ca(hco3)2
     pointKH[5] = 26.141811696;//26.14; ///mg(hco3)2
-    pointKH[6] = 17,870630941;//17.86; ///caco3
+    pointKH[6] = 17.870630941;//17.86; ///caco3
     pointKH[7] = 15.045147498;//15.05; ///mgco3
     pointKH[8] = 18.913122874;//18.91; ///na2co3
     pointKH[9] = 13.955288859;//13.96; ////k2co3
@@ -565,12 +565,18 @@ void MainWindow::on_doubleSpinBox_MgAnion_editingFinished()
     calcMgBySalt();
 }
 
+/*
+ * Slot: Alkalinity converter in
+ * */
 void MainWindow::on_doubleSpinBox_AlkalinityIN_editingFinished()
 {
     ui->doubleSpinBox_AlkalinityOUT->setValue(count(ui->doubleSpinBox_AlkalinityIN->value(),
                                          point[1], point[0]));
 }
 
+/*
+ * Slot: Alkalinity converter out
+ * */
 void MainWindow::on_doubleSpinBox_AlkalinityOUT_editingFinished()
 {
     ui->doubleSpinBox_AlkalinityIN->setValue(count(ui->doubleSpinBox_AlkalinityOUT->value(),
