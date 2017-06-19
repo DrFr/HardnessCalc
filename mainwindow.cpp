@@ -176,6 +176,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ///////////////////////////////////////
 
+    ui->comboBoxAlkalinityIN->addItem("мг-экв/л");
+    ui->comboBoxAlkalinityOUT->addItem("dKH");
 
     ui->comboBoxCaSalts->addItems(CaSaltList);
 
@@ -561,4 +563,16 @@ void MainWindow::on_doubleSpinBox_MgAnion_editingFinished()
     ui->doubleSpinBox_MgSalt->setValue(round100(anion * pointMgAnion[MgIndex]));
 
     calcMgBySalt();
+}
+
+void MainWindow::on_doubleSpinBox_AlkalinityIN_editingFinished()
+{
+    ui->doubleSpinBox_AlkalinityOUT->setValue(count(ui->doubleSpinBox_AlkalinityIN->value(),
+                                         point[1], point[0]));
+}
+
+void MainWindow::on_doubleSpinBox_AlkalinityOUT_editingFinished()
+{
+    ui->doubleSpinBox_AlkalinityIN->setValue(count(ui->doubleSpinBox_AlkalinityOUT->value(),
+                                         point[0], point[1]));
 }

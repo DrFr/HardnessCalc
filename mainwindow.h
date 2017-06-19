@@ -63,6 +63,10 @@ private slots:
 
     void on_doubleSpinBox_MgAnion_editingFinished();
 
+    void on_doubleSpinBox_AlkalinityIN_editingFinished();
+
+    void on_doubleSpinBox_AlkalinityOUT_editingFinished();
+
 private:
     Ui::MainWindow *ui;
 
