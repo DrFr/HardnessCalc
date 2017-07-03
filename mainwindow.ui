@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>576</width>
-    <height>455</height>
+    <width>633</width>
+    <height>311</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,6 +15,471 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>GH</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
+           <string>GH</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_2">
+           <item row="0" column="5">
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>mg/L Ca++</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_CaSalt">
+             <property name="maximum">
+              <double>9999.989999999999782</double>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="3">
+            <widget class="QComboBox" name="comboBoxMgSalts"/>
+           </item>
+           <item row="3" column="6">
+            <widget class="QDoubleSpinBox" name="doubleSpinBoxMgRation">
+             <property name="value">
+              <double>1.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLabel" name="label_6">
+             <property name="text">
+              <string>mg/L</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="7">
+            <widget class="QComboBox" name="comboBoxMineralResult">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_MgSalt">
+             <property name="maximum">
+              <double>9999.989999999999782</double>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="5">
+            <widget class="QDoubleSpinBox" name="doubleSpinBoxCa">
+             <property name="maximum">
+              <double>9999.989999999999782</double>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="5">
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>mg/L Mg++</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="7">
+            <widget class="QDoubleSpinBox" name="doubleSpinBoxResult">
+             <property name="maximum">
+              <double>9999.989999999999782</double>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="5">
+            <widget class="QDoubleSpinBox" name="doubleSpinBoxMg">
+             <property name="maximum">
+              <double>9999.989999999999782</double>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="6">
+            <widget class="QDoubleSpinBox" name="doubleSpinBoxCaRation">
+             <property name="value">
+              <double>3.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="6">
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Ration</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="3">
+            <widget class="QComboBox" name="comboBoxCaSalts"/>
+           </item>
+           <item row="0" column="7">
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>Result</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLabel" name="label_7">
+             <property name="text">
+              <string>mg/L</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="4">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_CaAnion">
+             <property name="maximum">
+              <double>9999.989999999999782</double>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="4">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_MgAnion">
+             <property name="maximum">
+              <double>9999.989999999999782</double>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="4">
+            <widget class="QLabel" name="label_CaAnion">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="4">
+            <widget class="QLabel" name="label_MgAnion">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QDoubleSpinBox" name="spinBox_CaSaltTank">
+             <property name="maximum">
+              <double>9999.989999999999782</double>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QDoubleSpinBox" name="spinBox_MgSaltTank">
+             <property name="maximum">
+              <double>9999.989999999999782</double>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_CaTank">
+             <property name="text">
+              <string>mg</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_MgTank">
+             <property name="text">
+              <string>mg</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="comboBox_caMass"/>
+           </item>
+           <item row="2" column="1">
+            <widget class="QComboBox" name="comboBox_mgMass"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>KH</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="title">
+           <string>KH</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="1" column="5">
+            <widget class="QDoubleSpinBox" name="spinBox_KHSaltTank">
+             <property name="maximum">
+              <double>9999.989999999999782</double>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QComboBox" name="comboBoxKHSalt"/>
+           </item>
+           <item row="3" column="2">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_KHCation">
+             <property name="maximum">
+              <double>9999.989999999999782</double>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>dKH</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="3">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
+             <property name="maximum">
+              <double>999.990000000000009</double>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="5">
+            <widget class="QComboBox" name="comboBox_KHMass"/>
+           </item>
+           <item row="3" column="3">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_KHAnion">
+             <property name="maximum">
+              <double>9999.989999999999782</double>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="3">
+            <widget class="QLabel" name="label_8">
+             <property name="text">
+              <string>mg/L</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="3">
+            <widget class="QLabel" name="labelKHAnion">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLabel" name="labelKHCation">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="6">
+            <widget class="QLabel" name="label_KHTank">
+             <property name="text">
+              <string>mg</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Converter</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="title">
+           <string>Converter</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_9">
+             <property name="text">
+              <string>Hardness</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QDoubleSpinBox" name="doubleSpinBoxIN">
+             <property name="maximum">
+              <double>9999.989999999999782</double>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QComboBox" name="comboBoxIN"/>
+           </item>
+           <item row="0" column="3">
+            <widget class="QComboBox" name="comboBoxOUT"/>
+           </item>
+           <item row="0" column="4">
+            <widget class="QDoubleSpinBox" name="doubleSpinBoxOUT">
+             <property name="readOnly">
+              <bool>false</bool>
+             </property>
+             <property name="decimals">
+              <number>2</number>
+             </property>
+             <property name="maximum">
+              <double>9999.989999999999782</double>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string>Alkalinity</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_AlkalinityIN">
+             <property name="maximum">
+              <double>9999.989999999999782</double>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="4">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_AlkalinityOUT">
+             <property name="maximum">
+              <double>9999.989999999999782</double>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QComboBox" name="comboBoxAlkalinityIN">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="3">
+            <widget class="QComboBox" name="comboBoxAlkalinityOUT">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>Other</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_8">
+        <item row="1" column="0">
+         <widget class="QGroupBox" name="groupBox_5">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="title">
+           <string>Other Salts</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_9">
+           <item row="0" column="3">
+            <widget class="QLabel" name="label_OtherAnion">
+             <property name="text">
+              <string>anion</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="4">
+            <widget class="QLabel" name="label_OtherCation">
+             <property name="text">
+              <string>cation</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="3">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_OtherAnion">
+             <property name="maximum">
+              <double>9999.989999999999782</double>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="label_13">
+             <property name="text">
+              <string>mg/L</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="4">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_OtherCation">
+             <property name="maximum">
+              <double>9999.989999999999782</double>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_OtherSaltTank">
+             <property name="maximum">
+              <double>9999.989999999999782</double>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QComboBox" name="comboBoxOtherSalts"/>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLabel" name="label_12">
+             <property name="text">
+              <string>Salt</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_OtherSalt">
+             <property name="maximum">
+              <double>9999.989999999999782</double>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_OtherTank">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QComboBox" name="comboBox_OtherMass"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
     <item>
      <widget class="QGroupBox" name="groupBox_4">
       <property name="title">
@@ -39,271 +504,6 @@
      </widget>
     </item>
     <item>
-     <widget class="QGroupBox" name="groupBox">
-      <property name="title">
-       <string>GH</string>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="5">
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>mg/L Ca++</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_CaSalt">
-         <property name="maximum">
-          <double>9999.989999999999782</double>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="3">
-        <widget class="QComboBox" name="comboBoxMgSalts"/>
-       </item>
-       <item row="3" column="6">
-        <widget class="QDoubleSpinBox" name="doubleSpinBoxMgRation">
-         <property name="value">
-          <double>1.000000000000000</double>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QLabel" name="label_6">
-         <property name="text">
-          <string>mg/L</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="7">
-        <widget class="QComboBox" name="comboBoxMineralResult">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="2">
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_MgSalt">
-         <property name="maximum">
-          <double>9999.989999999999782</double>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="5">
-        <widget class="QDoubleSpinBox" name="doubleSpinBoxCa">
-         <property name="maximum">
-          <double>9999.989999999999782</double>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="5">
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>mg/L Mg++</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="7">
-        <widget class="QDoubleSpinBox" name="doubleSpinBoxResult">
-         <property name="maximum">
-          <double>9999.989999999999782</double>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="5">
-        <widget class="QDoubleSpinBox" name="doubleSpinBoxMg">
-         <property name="maximum">
-          <double>9999.989999999999782</double>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="6">
-        <widget class="QDoubleSpinBox" name="doubleSpinBoxCaRation">
-         <property name="value">
-          <double>3.000000000000000</double>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="6">
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>Ration</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <widget class="QComboBox" name="comboBoxCaSalts"/>
-       </item>
-       <item row="0" column="7">
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>Result</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QLabel" name="label_7">
-         <property name="text">
-          <string>mg/L</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="4">
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_CaAnion">
-         <property name="maximum">
-          <double>9999.989999999999782</double>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="4">
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_MgAnion">
-         <property name="maximum">
-          <double>9999.989999999999782</double>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="4">
-        <widget class="QLabel" name="label_CaAnion">
-         <property name="text">
-          <string>TextLabel</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="4">
-        <widget class="QLabel" name="label_MgAnion">
-         <property name="text">
-          <string>TextLabel</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QDoubleSpinBox" name="spinBox_CaSaltTank">
-         <property name="maximum">
-          <double>9999.989999999999782</double>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QDoubleSpinBox" name="spinBox_MgSaltTank">
-         <property name="maximum">
-          <double>9999.989999999999782</double>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_CaTank">
-         <property name="text">
-          <string>mg</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_MgTank">
-         <property name="text">
-          <string>mg</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QComboBox" name="comboBox_caMass"/>
-       </item>
-       <item row="2" column="1">
-        <widget class="QComboBox" name="comboBox_mgMass"/>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item>
-     <widget class="QGroupBox" name="groupBox_2">
-      <property name="title">
-       <string>Converter</string>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_3">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_9">
-         <property name="text">
-          <string>Hardness</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QDoubleSpinBox" name="doubleSpinBoxIN">
-         <property name="maximum">
-          <double>9999.989999999999782</double>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QComboBox" name="comboBoxIN"/>
-       </item>
-       <item row="0" column="3">
-        <widget class="QComboBox" name="comboBoxOUT"/>
-       </item>
-       <item row="0" column="4">
-        <widget class="QDoubleSpinBox" name="doubleSpinBoxOUT">
-         <property name="readOnly">
-          <bool>false</bool>
-         </property>
-         <property name="decimals">
-          <number>2</number>
-         </property>
-         <property name="maximum">
-          <double>9999.989999999999782</double>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_10">
-         <property name="text">
-          <string>Alkalinity</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_AlkalinityIN">
-         <property name="maximum">
-          <double>9999.989999999999782</double>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="4">
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_AlkalinityOUT">
-         <property name="maximum">
-          <double>9999.989999999999782</double>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QComboBox" name="comboBoxAlkalinityIN">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <widget class="QComboBox" name="comboBoxAlkalinityOUT">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
      <spacer name="verticalSpacer_2">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
@@ -315,87 +515,6 @@
        </size>
       </property>
      </spacer>
-    </item>
-    <item>
-     <widget class="QGroupBox" name="groupBox_3">
-      <property name="title">
-       <string>KH</string>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_4">
-       <item row="1" column="5">
-        <widget class="QDoubleSpinBox" name="spinBox_KHSaltTank">
-         <property name="maximum">
-          <double>9999.989999999999782</double>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLabel" name="labelKHCation">
-         <property name="text">
-          <string>TextLabel</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QComboBox" name="comboBoxKHSalt"/>
-       </item>
-       <item row="2" column="2">
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_KHCation">
-         <property name="maximum">
-          <double>9999.989999999999782</double>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLabel" name="label_5">
-         <property name="text">
-          <string>dKH</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
-         <property name="maximum">
-          <double>999.990000000000009</double>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="4">
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_KHAnion">
-         <property name="maximum">
-          <double>9999.989999999999782</double>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="3">
-        <widget class="QLabel" name="labelKHAnion">
-         <property name="text">
-          <string>TextLabel</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="4">
-        <widget class="QLabel" name="label_8">
-         <property name="text">
-          <string>mg/L</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="5">
-        <widget class="QComboBox" name="comboBox_KHMass"/>
-       </item>
-       <item row="2" column="5">
-        <widget class="QLabel" name="label_KHTank">
-         <property name="text">
-          <string>mg</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
     </item>
    </layout>
   </widget>

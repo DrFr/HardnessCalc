@@ -81,6 +81,18 @@ private slots:
 
     void on_spinBox_KHSaltTank_editingFinished();
 
+    void on_doubleSpinBox_OtherSalt_editingFinished();
+
+    void on_comboBoxOtherSalts_currentIndexChanged(int index);
+
+    void on_doubleSpinBox_OtherAnion_editingFinished();
+
+    void on_doubleSpinBox_OtherCation_editingFinished();
+
+    void on_comboBox_OtherMass_currentIndexChanged(const QString &arg1);
+
+    void on_doubleSpinBox_OtherSaltTank_editingFinished();
+
 private:
     Ui::MainWindow *ui;
 
@@ -89,16 +101,17 @@ private:
 
     QMap<int, double> point, pointKH, pointCa,
     pointMg, pointKHCation, pointKHAnion,
-    pointCaAnion, pointMgAnion;
+    pointCaAnion, pointMgAnion, pointOtherAnion, pointOtherCation;
 
-    QStringList KHCationList, KHAnionList, CaAnionList, MgAnionList;
+    QStringList KHCationList, KHAnionList, CaAnionList, MgAnionList,
+    OtherCationList, OtherAnionList;
 
     double currentCa, currentMg,
            currentCaRatio, currentMgRatio;
 
     double tankValue;
 
-    int comboBoxMineralResult_val, KHIndex, CaIndex, MgIndex;
+    int comboBoxMineralResult_val, KHIndex, CaIndex, MgIndex, OtherIndex;
 
     int lastKHEdit; // 0 for doubleSpinBox_2 or 1 for doubleSpinBox_3
 
@@ -119,6 +132,10 @@ private:
     void calcCaSaltFromTank();
     void calcMgSaltFromTank();
     void calcKHSaltFromTank();
+
+    void calcOtherBySalt();
+    void calcOtherSaltForTank();
+    void calcOtherSaltFromTank();
 };
 
 #endif // MAINWINDOW_H

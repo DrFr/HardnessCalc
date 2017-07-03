@@ -34,13 +34,14 @@ MainWindow::MainWindow(QWidget *parent) :
     CaIndex = 0;
     MgIndex = 0;
     KHIndex = 0;
+    OtherIndex = 0;
 
     lastKHEdit = 0;
 
     tankValue = 100;
 
 
-    QStringList hardList, KHSaltList, CaSaltList, MgSaltList;
+    QStringList hardList, KHSaltList, CaSaltList, MgSaltList, OtherSaltList;
 
     point[0] = 1;
     point[1] = 2.8;
@@ -53,6 +54,40 @@ MainWindow::MainWindow(QWidget *parent) :
              << "Clark" ///2
              << "F" ///3
              << "ppm"; ///4
+
+    ////////////////////////// other
+    OtherSaltList << "K2SO4"
+                  << "Na2SO4"
+                  << "KCl"
+                  << "NaCl"
+                  << "KNO3"
+                     ;
+
+    OtherAnionList << "SO4--"
+                   << "SO4--"
+                   << "Cl-"
+                   << "Cl-"
+                   << "NO3-"
+                      ;
+
+    OtherCationList << "K-"
+                    << "Na-"
+                    << "K-"
+                    << "Na-"
+                    << "K"
+                       ;
+
+    pointOtherAnion[0] = 1.189439147;//k2so4
+    pointOtherAnion[1] = 1.478678685;//na2so4
+    pointOtherAnion[2] = 1.256680585;//kcl
+    pointOtherAnion[3] = 1.648585716;//nacl
+    pointOtherAnion[4] = 1.146738443;//kno3
+
+    pointOtherCation[0] = 12.557479969 / 2;//k2so4
+    pointOtherCation[1] = 6.178168073 / 2;//na2so4
+    pointOtherCation[2] = 4.895892639;//kcl
+    pointOtherCation[3] = 2.541816256;//nacl
+    pointOtherCation[4] = 7.81484673;//kno3
 
     ////////////////////////// KH
     pointKH[0] = 21.8;
@@ -129,6 +164,7 @@ MainWindow::MainWindow(QWidget *parent) :
     pointCa[4] = 3.396704426;//3.40;
     pointCa[5] = 4.094142422;//4.09;
     pointCa[6] = 5.892107391;//5.89;
+    pointCa[7] = 5.465798194;//5.89;
 
     pointCaAnion[0] = 1.667892197;//1.67;
     pointCaAnion[1] = 2.656859932 / 2;//2.66 / 2;
@@ -137,6 +173,7 @@ MainWindow::MainWindow(QWidget *parent) :
     pointCaAnion[4] = 1.417239602;//1.42;
     pointCaAnion[5] = 2.646382657 / 2;//2.65 / 2;
     pointCaAnion[6] = 3.80855603 / 2;//3.81 / 2;
+    pointCaAnion[7] = 6.18005586 / 2;//3.81 / 2;
 
     CaSaltList << "CaCO3" ///0
                << "Ca(HCO3)2" ///1
@@ -144,7 +181,8 @@ MainWindow::MainWindow(QWidget *parent) :
                << "CaCl2" ///3
                << "CaSO4" ///4
                << "Ca(NO3)2" ///5
-               << "Ca(NO3)2*4H2O"; ///6
+               << "Ca(NO3)2*4H2O" ///6
+               << "CaCl*6H2O"; ///7
 
     CaAnionList << "CO3--" ///0
                 << "HCO3-" ///1
@@ -152,7 +190,8 @@ MainWindow::MainWindow(QWidget *parent) :
                 << "Cl-" ///3
                 << "SO4--" ///4
                 << "NO3-" ///5
-                << "NO3-"; ///6
+                << "NO3-" ///6
+                << "Cl-"; ///7
 
 
 
@@ -193,6 +232,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBox_caMass->addItems(mass);
     ui->comboBox_mgMass->addItems(mass);
     ui->comboBox_KHMass->addItems(mass);
+    ui->comboBox_OtherMass->addItems(mass);
+
+
+    ui->comboBoxOtherSalts->addItems(OtherSaltList);
 
 
     ui->comboBoxAlkalinityIN->addItem("мг-экв/л");
@@ -603,6 +646,35 @@ void MainWindow::calcKHSaltFromTank() {
     on_doubleSpinBox_3_editingFinished();
 }
 
+void MainWindow::calcOtherBySalt() {
+    double salt = ui->doubleSpinBox_OtherSalt->value();
+
+    ui->doubleSpinBox_OtherAnion->setValue(round100(salt / pointOtherAnion[OtherIndex]));
+
+    ui->doubleSpinBox_OtherCation->setValue(round100(salt / pointOtherCation[OtherIndex]));
+
+    calcOtherSaltForTank();
+}
+
+void MainWindow::calcOtherSaltForTank() {
+    QString label = "mg";
+    double salt = mgToGramms(round100(ui->doubleSpinBox_OtherSalt->value() * tankValue), &label);
+
+    ui->doubleSpinBox_OtherSaltTank->setValue(salt);
+    ui->comboBox_OtherMass->setCurrentText(label);
+    ui->label_OtherTank->setText("per " + QString::number(tankValue) + "L");
+}
+
+void MainWindow::calcOtherSaltFromTank() {
+    double saltTank = ui->doubleSpinBox_OtherSaltTank->value();
+    if(ui->comboBox_OtherMass->currentText() == "g") {
+        saltTank = round100(saltTank * 1000);
+    }
+    saltTank = round100(saltTank  / tankValue);
+    ui->doubleSpinBox_OtherSalt->setValue(saltTank);
+    calcOtherBySalt();
+}
+
 /*
  * Slot: KH Cation spinbox
  * */
@@ -684,6 +756,7 @@ void MainWindow::on_doubleSpinBox_tankValue_editingFinished()
     calcCaSaltForTank();
     calcMgSaltForTank();
     calcKHSaltForTank();
+    calcOtherSaltForTank();
 }
 
 void MainWindow::on_spinBox_CaSaltTank_editingFinished()
@@ -723,4 +796,54 @@ void MainWindow::on_comboBox_KHMass_currentIndexChanged(const QString &arg1)
 void MainWindow::on_spinBox_KHSaltTank_editingFinished()
 {
     calcKHSaltFromTank();
+}
+
+void MainWindow::on_doubleSpinBox_OtherSalt_editingFinished()
+{
+    calcOtherBySalt();
+}
+
+void MainWindow::on_comboBoxOtherSalts_currentIndexChanged(int index)
+{
+    OtherIndex = index;
+
+    ui->label_OtherCation->setText(OtherCationList[OtherIndex]);
+    ui->label_OtherAnion->setText(OtherAnionList[OtherIndex]);
+
+    calcOtherBySalt();
+}
+
+void MainWindow::on_doubleSpinBox_OtherAnion_editingFinished()
+{
+    double anion = ui->doubleSpinBox_OtherAnion->value();
+
+    double substance = round100(anion * pointOtherAnion[OtherIndex]);
+
+    ui->doubleSpinBox_OtherSalt->setValue(substance);
+
+    calcOtherBySalt();
+}
+
+void MainWindow::on_doubleSpinBox_OtherCation_editingFinished()
+{
+    double cation = ui->doubleSpinBox_OtherCation->value();
+
+    double substance = round100(cation * pointOtherCation[OtherIndex]);
+
+    ui->doubleSpinBox_OtherSalt->setValue(substance);
+
+    calcOtherBySalt();
+}
+
+void MainWindow::on_comboBox_OtherMass_currentIndexChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    if(ui->doubleSpinBox_OtherSaltTank->value() > 0) {
+        calcOtherSaltFromTank();
+    }
+}
+
+void MainWindow::on_doubleSpinBox_OtherSaltTank_editingFinished()
+{
+    calcOtherSaltFromTank();
 }
