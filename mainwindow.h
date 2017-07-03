@@ -67,6 +67,20 @@ private slots:
 
     void on_doubleSpinBox_AlkalinityOUT_editingFinished();
 
+    void on_doubleSpinBox_tankValue_editingFinished();
+
+    void on_spinBox_CaSaltTank_editingFinished();
+
+    void on_spinBox_MgSaltTank_editingFinished();
+
+    void on_comboBox_caMass_currentIndexChanged(const QString &arg1);
+
+    void on_comboBox_mgMass_currentIndexChanged(const QString &arg1);
+
+    void on_comboBox_KHMass_currentIndexChanged(const QString &arg1);
+
+    void on_spinBox_KHSaltTank_editingFinished();
+
 private:
     Ui::MainWindow *ui;
 
@@ -82,6 +96,8 @@ private:
     double currentCa, currentMg,
            currentCaRatio, currentMgRatio;
 
+    double tankValue;
+
     int comboBoxMineralResult_val, KHIndex, CaIndex, MgIndex;
 
     int lastKHEdit; // 0 for doubleSpinBox_2 or 1 for doubleSpinBox_3
@@ -95,6 +111,14 @@ private:
 
     void calcCaBySalt();
     void calcMgBySalt();
+
+    void calcCaSaltForTank();
+    void calcMgSaltForTank();
+    void calcKHSaltForTank();
+
+    void calcCaSaltFromTank();
+    void calcMgSaltFromTank();
+    void calcKHSaltFromTank();
 };
 
 #endif // MAINWINDOW_H

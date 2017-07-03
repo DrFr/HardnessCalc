@@ -7,6 +7,15 @@ double round100(double val) {
     return round(val * 100) / 100;
 }
 
+double mgToGramms(double val, QString *label) {
+    if(val >= 1000) {
+        *label = "g";
+        return round100(val / 1000);
+    }
+    *label = "mg";
+    return val;
+}
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -27,6 +36,8 @@ MainWindow::MainWindow(QWidget *parent) :
     KHIndex = 0;
 
     lastKHEdit = 0;
+
+    tankValue = 100;
 
 
     QStringList hardList, KHSaltList, CaSaltList, MgSaltList;
@@ -176,6 +187,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ///////////////////////////////////////
 
+    QStringList mass;
+    mass << "mg" << "g";
+
+    ui->comboBox_caMass->addItems(mass);
+    ui->comboBox_mgMass->addItems(mass);
+    ui->comboBox_KHMass->addItems(mass);
+
+
     ui->comboBoxAlkalinityIN->addItem("мг-экв/л");
     ui->comboBoxAlkalinityOUT->addItem("dKH");
 
@@ -192,6 +211,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->comboBoxKHSalt->addItems(KHSaltList);
     ui->comboBoxKHSalt->setCurrentIndex(ui->comboBoxKHSalt->findText("HCO3-"));
+
+    ui->doubleSpinBox_tankValue->setValue(tankValue);
 }
 
 MainWindow::~MainWindow()
@@ -365,6 +386,8 @@ void MainWindow::on_doubleSpinBox_2_editingFinished()
     ui->doubleSpinBox_KHCation->setValue(cation);
     ui->doubleSpinBox_KHAnion->setValue(anion);
 
+    calcKHSaltForTank();
+
     lastKHEdit = 0;
 }
 
@@ -383,6 +406,8 @@ void MainWindow::on_doubleSpinBox_3_editingFinished()
 
     ui->doubleSpinBox_KHCation->setValue(cation);
     ui->doubleSpinBox_KHAnion->setValue(anion);
+
+    calcKHSaltForTank();
 
     lastKHEdit = 1;
 }
@@ -472,6 +497,8 @@ void MainWindow::calcSaltByCa() {
     ui->doubleSpinBox_CaSalt->setValue(salt);
 
     ui->doubleSpinBox_CaAnion->setValue(round100(salt / pointCaAnion[CaIndex]));
+
+    calcCaSaltForTank();
 }
 
 /*
@@ -485,6 +512,8 @@ void MainWindow::calcSaltByMg() {
     ui->doubleSpinBox_MgSalt->setValue(salt);
 
     ui->doubleSpinBox_MgAnion->setValue(round100(salt / pointMgAnion[MgIndex]));
+
+    calcMgSaltForTank();
 }
 
 /*
@@ -498,6 +527,8 @@ void MainWindow::calcCaBySalt() {
     ui->doubleSpinBoxResult->setValue(calcMineral());
 
     ui->doubleSpinBox_CaAnion->setValue(round100(salt / pointCaAnion[CaIndex]));
+
+    calcCaSaltForTank();
 }
 
 /*
@@ -511,6 +542,65 @@ void MainWindow::calcMgBySalt() {
     ui->doubleSpinBoxResult->setValue(calcMineral());
 
     ui->doubleSpinBox_MgAnion->setValue(round100(salt / pointMgAnion[MgIndex]));
+
+    calcMgSaltForTank();
+}
+
+void MainWindow::calcCaSaltForTank() {
+    QString caLabel = "mg";
+    double ca = mgToGramms(round100(ui->doubleSpinBox_CaSalt->value() * tankValue), &caLabel);
+
+    ui->spinBox_CaSaltTank->setValue(ca);
+    ui->comboBox_caMass->setCurrentText(caLabel);
+    ui->label_CaTank->setText("per " + QString::number(tankValue) + "L");
+}
+
+void MainWindow::calcMgSaltForTank() {
+    QString mgLabel  = "mg";
+    double mg = mgToGramms(round100(ui->doubleSpinBox_MgSalt->value() * tankValue), &mgLabel);
+
+    ui->spinBox_MgSaltTank->setValue(mg);
+    ui->comboBox_mgMass->setCurrentText(mgLabel);
+    ui->label_MgTank->setText("per " + QString::number(tankValue) + "L");
+}
+
+void MainWindow::calcKHSaltForTank() {
+    QString khLabel  = "mg";
+    double salt = mgToGramms(round100(ui->doubleSpinBox_3->value() * tankValue), &khLabel);
+
+    ui->spinBox_KHSaltTank->setValue(salt);
+    ui->comboBox_KHMass->setCurrentText(khLabel);
+    ui->label_KHTank->setText("per " + QString::number(tankValue) + "L");
+}
+
+void MainWindow::calcCaSaltFromTank() {
+    double caTank = ui->spinBox_CaSaltTank->value();
+    if(ui->comboBox_caMass->currentText() == "g") {
+        caTank = round100(caTank * 1000);
+    }
+    caTank = round100(caTank  / tankValue);
+    ui->doubleSpinBox_CaSalt->setValue(caTank);
+    calcCaBySalt();
+}
+
+void MainWindow::calcMgSaltFromTank() {
+    double mgTank = ui->spinBox_MgSaltTank->value();
+    if(ui->comboBox_mgMass->currentText() == "g") {
+        mgTank = round100(mgTank * 1000);
+    }
+    mgTank = round100(mgTank  / tankValue);
+    ui->doubleSpinBox_MgSalt->setValue(mgTank);
+    calcMgBySalt();
+}
+
+void MainWindow::calcKHSaltFromTank() {
+    double saltTank = ui->spinBox_KHSaltTank->value();
+    if(ui->comboBox_KHMass->currentText() == "g") {
+        saltTank = round100(saltTank * 1000);
+    }
+    saltTank = round100(saltTank  / tankValue);
+    ui->doubleSpinBox_3->setValue(saltTank);
+    on_doubleSpinBox_3_editingFinished();
 }
 
 /*
@@ -581,4 +671,56 @@ void MainWindow::on_doubleSpinBox_AlkalinityOUT_editingFinished()
 {
     ui->doubleSpinBox_AlkalinityIN->setValue(count(ui->doubleSpinBox_AlkalinityOUT->value(),
                                          point[0], point[1]));
+}
+
+/**
+ * @brief MainWindow::on_doubleSpinBox_tankValue_editingFinished
+ * Slot: Setting tank value
+ */
+void MainWindow::on_doubleSpinBox_tankValue_editingFinished()
+{
+    tankValue = ui->doubleSpinBox_tankValue->value();
+
+    calcCaSaltForTank();
+    calcMgSaltForTank();
+    calcKHSaltForTank();
+}
+
+void MainWindow::on_spinBox_CaSaltTank_editingFinished()
+{
+    calcCaSaltFromTank();
+}
+
+void MainWindow::on_spinBox_MgSaltTank_editingFinished()
+{
+    calcMgSaltFromTank();
+}
+
+void MainWindow::on_comboBox_caMass_currentIndexChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    if(ui->spinBox_CaSaltTank->value() > 0) {
+        calcCaSaltFromTank();
+    }
+}
+
+void MainWindow::on_comboBox_mgMass_currentIndexChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    if(ui->spinBox_MgSaltTank->value() > 0) {
+        calcMgSaltFromTank();
+    }
+}
+
+void MainWindow::on_comboBox_KHMass_currentIndexChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    if(ui->spinBox_KHSaltTank->value() > 0) {
+        calcKHSaltFromTank();
+    }
+}
+
+void MainWindow::on_spinBox_KHSaltTank_editingFinished()
+{
+    calcKHSaltFromTank();
 }
