@@ -496,7 +496,7 @@
        <item row="0" column="1">
         <widget class="QLabel" name="label_11">
          <property name="text">
-          <string>Tank Value</string>
+          <string>Water Value</string>
          </property>
         </widget>
        </item>

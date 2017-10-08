@@ -40,7 +40,54 @@ MainWindow::MainWindow(QWidget *parent) :
 
     tankValue = 100;
 
+    ////////////////////////////Molar Mass
 
+    MolarMass["Na"] = 22.98976928;
+    MolarMass["K"] = 39.0983;
+    MolarMass["Ca"] = 40.078;
+    MolarMass["Mg"] = 24.304;
+    MolarMass["Cl"] = 35.446;
+    MolarMass["N"] = 14.00643;
+    MolarMass["C"] = 12.0096;
+    MolarMass["O"] = 15.99903;
+    MolarMass["S"] = 32.059;
+    MolarMass["H"] = 1.00784;
+
+    MolarMass["HCO3"] = MolarMass["H"] + MolarMass["C"] + MolarMass["O"] * 3;
+    MolarMass["CO3"] = MolarMass["C"] + MolarMass["O"] * 3;
+    MolarMass["SO4"] = MolarMass["S"] + MolarMass["O"] * 4;
+    MolarMass["NO3"] = MolarMass["N"] + MolarMass["O"] * 3;
+    MolarMass["H2O"] = MolarMass["H"] * 2 + MolarMass["O"];
+
+    MolarMass["K2SO4"] = MolarMass["K"] * 2 + MolarMass["SO4"];
+    MolarMass["Na2SO4"] = MolarMass["Na"] * 2 + MolarMass["SO4"];
+    MolarMass["NaCl"] = MolarMass["Na"] + MolarMass["Cl"];
+    MolarMass["KCl"] = MolarMass["K"] + MolarMass["Cl"];
+    MolarMass["KNO3"] = MolarMass["K"] + MolarMass["NO3"];
+    MolarMass["NaHCO3"] = MolarMass["Na"] + MolarMass["HCO3"];
+    MolarMass["KHCO3"] = MolarMass["K"] + MolarMass["HCO3"];
+    MolarMass["Na2CO3"] = MolarMass["Na"] * 2 + MolarMass["CO3"];
+    MolarMass["K2CO3"] = MolarMass["K"] * 2 + MolarMass["CO3"];
+
+    MolarMass["Ca(HCO3)2"] = MolarMass["Ca"] + MolarMass["HCO3"] * 2;
+    MolarMass["Mg(HCO3)2"] = MolarMass["Mg"] + MolarMass["HCO3"] * 2;
+    MolarMass["CaCO3"] = MolarMass["Ca"] + MolarMass["CO3"];
+    MolarMass["MgCO3"] = MolarMass["Mg"] + MolarMass["CO3"];
+    MolarMass["CaCl2"] = MolarMass["Ca"] + MolarMass["Cl"] * 2;
+    MolarMass["MgCl2"] = MolarMass["Mg"] + MolarMass["Cl"] * 2;
+    MolarMass["CaSO4"] = MolarMass["Ca"] + MolarMass["SO4"];
+    MolarMass["MgSO4"] = MolarMass["Mg"] + MolarMass["SO4"];
+    MolarMass["Ca(NO3)2"] = MolarMass["Ca"] + MolarMass["NO3"] * 2;
+    MolarMass["Mg(NO3)2"] = MolarMass["Mg"] + MolarMass["NO3"] * 2;
+
+    MolarMass["MgSO4*7H2O"] = MolarMass["MgSO4"] + 7 * MolarMass["H2O"];
+    MolarMass["CaSO4*2H2O"] = MolarMass["CaSO4"] + 2 * MolarMass["H2O"];
+    MolarMass["Ca(NO3)2*4H2O"] = MolarMass["Ca(NO3)2"] + 4 * MolarMass["H2O"];
+    MolarMass["CaCl2*6H2O"] = MolarMass["Ca(NO3)2"] + 6 * MolarMass["H2O"];
+    MolarMass["Mg(NO3)2*6H2O"] = MolarMass["Mg(NO3)2"] + 6 * MolarMass["H2O"];
+
+
+    ////////////////////////////
     QStringList hardList, KHSaltList, CaSaltList, MgSaltList, OtherSaltList;
 
     point[0] = 1;
@@ -77,23 +124,23 @@ MainWindow::MainWindow(QWidget *parent) :
                     << "K"
                        ;
 
-    pointOtherAnion[0] = 1.189439147;//k2so4
-    pointOtherAnion[1] = 1.478678685;//na2so4
-    pointOtherAnion[2] = 1.256680585;//kcl
-    pointOtherAnion[3] = 1.648585716;//nacl
-    pointOtherAnion[4] = 1.146738443;//kno3
+    pointOtherAnion[0] = MolarMass["K2SO4"] / MolarMass["SO4"];//1.189439147;//k2so4
+    pointOtherAnion[1] = MolarMass["Na2SO4"] / MolarMass["SO4"];//1.478678685;//na2so4
+    pointOtherAnion[2] = MolarMass["KCl"] / MolarMass["Cl"];//1.256680585;//kcl
+    pointOtherAnion[3] = MolarMass["NaCl"] / MolarMass["Cl"];//1.648585716;//nacl
+    pointOtherAnion[4] = MolarMass["KNO3"] / MolarMass["NO3"];//1.146738443;//kno3
 
-    pointOtherCation[0] = 12.557479969 / 2;//k2so4
-    pointOtherCation[1] = 6.178168073 / 2;//na2so4
-    pointOtherCation[2] = 4.895892639;//kcl
-    pointOtherCation[3] = 2.541816256;//nacl
-    pointOtherCation[4] = 7.81484673;//kno3
+    pointOtherCation[0] = MolarMass["K2SO4"] / MolarMass["K"] / 2;//12.557479969 / 2;//k2so4
+    pointOtherCation[1] = MolarMass["Na2SO4"] / MolarMass["Na"] / 2;//6.178168073 / 2;//na2so4
+    pointOtherCation[2] = MolarMass["KCl"] / MolarMass["K"];//4.895892639;//kcl
+    pointOtherCation[3] = MolarMass["NaCl"] / MolarMass["Na"];//2.541816256;//nacl
+    pointOtherCation[4] = MolarMass["KNO3"] / MolarMass["K"];//7.81484673;//kno3
 
     ////////////////////////// KH
     pointKH[0] = 21.8;
     pointKH[1] = 10.7145;
     pointKH[2] = 30.019672131;//30; ///nahco3
-    pointKH[3] = 25.050749289;//25.05; ///khco3
+    pointKH[3] = 35.768862671;//25.05; ///khco3
     pointKH[4] = 28.959773254;//28.96; ///ca(hco3)2
     pointKH[5] = 26.141811696;//26.14; ///mg(hco3)2
     pointKH[6] = 17.870630941;//17.86; ///caco3
@@ -103,25 +150,25 @@ MainWindow::MainWindow(QWidget *parent) :
 
     pointKHCation[0] = -1;
     pointKHCation[1] = -1;
-    pointKHCation[2] = 3.653986182;//3.65;
-    pointKHCation[3] = 7.706146203;//7.71;
-    pointKHCation[4] = 4.044789161;//4.05;
-    pointKHCation[5] = 6.020945523;//6.02;
-    pointKHCation[6] = 2.497247617;//2.50;
-    pointKHCation[7] = 3.469004691;//3.47;
-    pointKHCation[8] = 4.610259403 / 2;//4.61 / 2;
-    pointKHCation[9] = 8.595373861 / 2;//8.60 / 2;
+    pointKHCation[2] = MolarMass["NaHCO3"] / MolarMass["Na"];//3.653986182;//3.65;
+    pointKHCation[3] = MolarMass["KHCO3"] / MolarMass["K"];//2.560725147;//7.706146203;//7.71;
+    pointKHCation[4] = MolarMass["Ca(HCO3)2"] / MolarMass["Ca"];//4.044789161;//4.05;
+    pointKHCation[5] = MolarMass["Mg(HCO3)2"] / MolarMass["Mg"];//6.020945523;//6.02;
+    pointKHCation[6] = MolarMass["CaCO3"] / MolarMass["Ca"];//2.497247617;//2.50;
+    pointKHCation[7] = MolarMass["MgCO3"] / MolarMass["Mg"];//3.469004691;//3.47;
+    pointKHCation[8] = MolarMass["Na2CO3"] / MolarMass["Na"] / 2;//4.610259403 / 2;//4.61 / 2;
+    pointKHCation[9] = MolarMass["K2CO3"] / MolarMass["K"] / 2;//8.595373861 / 2;//8.60 / 2;
 
     pointKHAnion[0] = -1;
     pointKHAnion[1] = -1;
-    pointKHAnion[2] = 1.376791713;//1.38;
-    pointKHAnion[3] = 1.14911694;//1.15;
-    pointKHAnion[4] = 2.656859932 / 2;//2.66 / 2;
-    pointKHAnion[5] = 2.398331348 / 2;//2.40 / 2;
-    pointKHAnion[6] = 1.667892197;//1.67;
-    pointKHAnion[7] = 1.405021507;//1.41;
-    pointKHAnion[8] = 1.766283059;//1.77;
-    pointKHAnion[9] = 1.303242855;//1.30;
+    pointKHAnion[2] = MolarMass["NaHCO3"] / MolarMass["HCO3"];//1.376791713;//1.38;
+    pointKHAnion[3] = MolarMass["KHCO3"] / MolarMass["HCO3"];//1.640773517;//1.14911694;//1.15;
+    pointKHAnion[4] = MolarMass["Ca(HCO3)2"] / MolarMass["HCO3"] / 2;//2.656859932 / 2;//2.66 / 2;
+    pointKHAnion[5] = MolarMass["Mg(HCO3)2"] / MolarMass["HCO3"] / 2;//2.398331348 / 2;//2.40 / 2;
+    pointKHAnion[6] = MolarMass["CaCO3"] / MolarMass["CO3"];//1.667892197;//1.67;
+    pointKHAnion[7] = MolarMass["MgCO3"] / MolarMass["CO3"];//1.405021507;//1.41;
+    pointKHAnion[8] = MolarMass["Na2CO3"] / MolarMass["CO3"];//1.766283059;//1.77;
+    pointKHAnion[9] = MolarMass["K2CO3"] / MolarMass["CO3"];//1.303242855;//1.30;
 
     KHSaltList << "HCO3-" ///0
                << "CO3--" ///1
@@ -157,23 +204,23 @@ MainWindow::MainWindow(QWidget *parent) :
                 << "CO3--"; ///9
 
     ////////////////////////////
-    pointCa[0] = 2.497247617;//2.50;
-    pointCa[1] = 4.044789161;//4.05;
-    pointCa[2] = 4.295686911;//4.30;
-    pointCa[3] = 2.768850741;//2.77;
-    pointCa[4] = 3.396704426;//3.40;
-    pointCa[5] = 4.094142422;//4.09;
-    pointCa[6] = 5.892107391;//5.89;
-    pointCa[7] = 5.465798194;//5.89;
+    pointCa[0] = MolarMass["CaCO3"] / MolarMass["Ca"];//2.497247617;//2.50;
+    pointCa[1] = MolarMass["Ca(HCO3)2"] / MolarMass["Ca"];//4.044789161;//4.05;
+    pointCa[2] = MolarMass["CaSO4*2H2O"] / MolarMass["Ca"];//4.295686911;//4.30;
+    pointCa[3] = MolarMass["CaCl2"] / MolarMass["Ca"];//2.768850741;//2.77;
+    pointCa[4] = MolarMass["CaSO4"] / MolarMass["Ca"];//3.396704426;//3.40;
+    pointCa[5] = MolarMass["Ca(NO3)2"] / MolarMass["Ca"];//4.094142422;//4.09;
+    pointCa[6] = MolarMass["Ca(NO3)2*4H2O"] / MolarMass["Ca"];//5.892107391;//5.89;
+    pointCa[7] = MolarMass["CaCl2*6H2O"] / MolarMass["Ca"];//5.465798194;//5.89;
 
-    pointCaAnion[0] = 1.667892197;//1.67;
-    pointCaAnion[1] = 2.656859932 / 2;//2.66 / 2;
-    pointCaAnion[2] = 1.792330695;//1.79;
-    pointCaAnion[3] = 3.130677651 / 2;//3.13 / 2;
-    pointCaAnion[4] = 1.417239602;//1.42;
-    pointCaAnion[5] = 2.646382657 / 2;//2.65 / 2;
-    pointCaAnion[6] = 3.80855603 / 2;//3.81 / 2;
-    pointCaAnion[7] = 6.18005586 / 2;//3.81 / 2;
+    pointCaAnion[0] = MolarMass["CaCO3"] / MolarMass["CO3"];//1.667892197;//1.67;
+    pointCaAnion[1] = MolarMass["Ca(HCO3)2"] / MolarMass["HCO3"] / 2;//2.656859932 / 2;//2.66 / 2;
+    pointCaAnion[2] = MolarMass["CaSO4*2H2O"] / MolarMass["SO4"];//1.792330695;//1.79;
+    pointCaAnion[3] = MolarMass["CaCl2"] / MolarMass["Cl"] / 2;//3.130677651 / 2;//3.13 / 2;
+    pointCaAnion[4] = MolarMass["CaSO4"] / MolarMass["SO4"];//1.417239602;//1.42;
+    pointCaAnion[5] = MolarMass["Ca(NO3)2"] / MolarMass["NO3"] / 2;//2.646382657 / 2;//2.65 / 2;
+    pointCaAnion[6] = MolarMass["Ca(NO3)2*4H2O"] / MolarMass["NO3"] / 2;//3.80855603 / 2;//3.81 / 2;
+    pointCaAnion[7] = MolarMass["CaCl2*6H2O"] / MolarMass["Cl"] / 2;//6.18005586 / 2;//3.81 / 2;
 
     CaSaltList << "CaCO3" ///0
                << "Ca(HCO3)2" ///1
@@ -182,7 +229,7 @@ MainWindow::MainWindow(QWidget *parent) :
                << "CaSO4" ///4
                << "Ca(NO3)2" ///5
                << "Ca(NO3)2*4H2O" ///6
-               << "CaCl*6H2O"; ///7
+               << "CaCl2*6H2O"; ///7
 
     CaAnionList << "CO3--" ///0
                 << "HCO3-" ///1
@@ -195,19 +242,19 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-    pointMg[0] = 3.469004691;//3.47;
-    pointMg[1] = 6.020945523;//6.02;
-    pointMg[2] = 10.140803571;//10.14;
-    pointMg[3] = 3.916886109;//3.98;
-    pointMg[4] = 6.102330481;//6.10;
-    pointMg[5] = 10.549674951;//10.55;
+    pointMg[0] = MolarMass["MgCO3"] / MolarMass["Mg"];//3.469004691;//3.47;
+    pointMg[1] = MolarMass["Mg(HCO3)2"] / MolarMass["Mg"];//6.020945523;//6.02;
+    pointMg[2] = MolarMass["MgSO4*7H2O"] / MolarMass["Mg"];//10.140803571;//10.14;
+    pointMg[3] = MolarMass["MgCl2"] / MolarMass["Mg"];//3.916886109;//3.98;
+    pointMg[4] = MolarMass["Mg(NO3)2"] / MolarMass["Mg"];//6.102330481;//6.10;
+    pointMg[5] = MolarMass["Mg(NO3)2*6H2O"] / MolarMass["Mg"];//10.549674951;//10.55;
 
-    pointMgAnion[0] = 1.405021507;//1.41;
-    pointMgAnion[1] = 2.398331348 / 2;//2.40 / 2;
-    pointMgAnion[2] = 2.565840218;//2.57;
-    pointMgAnion[3] = 2.685662698 / 2;//2.69 / 2;
-    pointMgAnion[4] = 2.391977746 / 2;//2.39 / 2;
-    pointMgAnion[5] = 4.135237806 / 2;//4.14 / 2;
+    pointMgAnion[0] = MolarMass["MgCO3"] / MolarMass["CO3"];//1.405021507;//1.41;
+    pointMgAnion[1] = MolarMass["Mg(HCO3)2"] / MolarMass["HCO3"] / 2;//2.398331348 / 2;//2.40 / 2;
+    pointMgAnion[2] = MolarMass["MgSO4*7H2O"] / MolarMass["SO4"];//2.565840218;//2.57;
+    pointMgAnion[3] = MolarMass["MgCl2"] / MolarMass["Cl"] / 2;//2.685662698 / 2;//2.69 / 2;
+    pointMgAnion[4] = MolarMass["Mg(NO3)2"] / MolarMass["NO3"] / 2;//2.391977746 / 2;//2.39 / 2;
+    pointMgAnion[5] = MolarMass["Mg(NO3)2*6H2O"] / MolarMass["NO3"] / 2;//4.135237806 / 2;//4.14 / 2;
 
     MgSaltList << "MgCO3" ///0
                << "Mg(HCO3)2" ///1

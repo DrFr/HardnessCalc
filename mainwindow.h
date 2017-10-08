@@ -103,6 +103,8 @@ private:
     pointMg, pointKHCation, pointKHAnion,
     pointCaAnion, pointMgAnion, pointOtherAnion, pointOtherCation;
 
+    QMap<QString, double> MolarMass;
+
     QStringList KHCationList, KHAnionList, CaAnionList, MgAnionList,
     OtherCationList, OtherAnionList;
 
