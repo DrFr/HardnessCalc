@@ -350,7 +350,7 @@ double MainWindow::calcMineral() {
     double hardnessMg = currentMg / 12.15;
     double ratio = currentCa / currentMg;
     if(currentCa >= currentMg) {
-        if(currentMg != 0) {
+        if(currentMg != 0.0) {
             ui->doubleSpinBoxCaRation->setValue(ratio);
             ui->doubleSpinBoxMgRation->setValue(1);
         } else {
@@ -358,7 +358,7 @@ double MainWindow::calcMineral() {
             ui->doubleSpinBoxMgRation->setValue(0);
         }
     } else {
-        if(currentCa != 0) {
+        if(currentCa != 0.0) {
             ratio = currentMg / currentCa;
             ui->doubleSpinBoxCaRation->setValue(1);
             ui->doubleSpinBoxMgRation->setValue(ratio);
